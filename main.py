@@ -49,13 +49,24 @@ def play_opencv():
 
 
 """Preguntar a Yesid"""
-if os.path.exists('archivosDCM'):
-    archivos_dicom = [archivo for archivo in os.listdir('archivosDCM') if archivo.endswith('.dcm')]
-    archivos_dicom.sort()
-    imagenes_dicom = [pydicom.dcmread(os.path.join('archivosDCM', archivo)) for archivo in archivos_dicom]
-    for img in imagenes_dicom:
-        plt.imshow(img.pixel_array, cmap='gray')
-        plt.title("Imagen DICOM")
-        plt.show()
-else:
-    print("La carpeta no existe.")
+def parte_dicom():
+    if os.path.exists('archivosDCM'):
+        archivos_dicom = [archivo for archivo in os.listdir('archivosDCM') if archivo.endswith('.dcm')]
+        archivos_dicom.sort()
+        imagenes_dicom = [pydicom.dcmread(os.path.join('archivosDCM', archivo)) for archivo in archivos_dicom]
+        for img in imagenes_dicom:
+            plt.imshow(img.pixel_array, cmap='gray')
+            plt.title("Imagen DICOM")
+            plt.show()
+    else:
+        print("La carpeta no existe.")
+
+while True:
+    print("Opciones:\n1- Parte opencv\n2- Parte dicom")
+    menu = int(input("Elija una opción: "))
+    if menu == 1:
+        play_opencv()
+    elif menu == 2:
+        parte_dicom()
+    else:
+        print("valor no válido.")
